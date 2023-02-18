@@ -17,12 +17,15 @@ mongoose.connect('mongodb+srv://'+mongo_username+':'+mongo_password+'@cluster0.t
             ip: String,
             files: []
           });
-
+        
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 app.post('/register', (req, res) => {
+
+  
+
 
         //mongodb connection
         
@@ -78,23 +81,18 @@ app.get('/find', (req, res) => {
 
 app.get('/unregisterIp', (req, res) => {
 
-  const mySchema = new mongoose.Schema({
-    ip: String,
-    // ... other fields
-  });
-
-  // Define the model for the collection
-  const MyModel = mongoose.model('Data', mySchema);
-
+  const Data = mongoose.model('Data', dataSchema);
   // Define the username to delete
   let ipToUnregister = '192.168.0.500';
 
   // Delete the document(s) with the specified username
-  MyModel.deleteOne({ username: ipToUnregister }, (err, result) => {
+  Data.deleteOne({ ip: ipToUnregister }, (err, result) => {
     if (err) {
       console.error(err);
+      res.send(err);
     } else {
       console.log(`Deleted ${result.deletedCount} documents.`);
+      res.send(`Deleted ${result.deletedCount} documents.`);
     }
   });
 })

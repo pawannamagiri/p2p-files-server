@@ -76,6 +76,29 @@ app.get('/find', (req, res) => {
 
 })
 
+app.get('/unregisterIp', (req, res) => {
+
+  const mySchema = new mongoose.Schema({
+    ip: String,
+    // ... other fields
+  });
+
+  // Define the model for the collection
+  const MyModel = mongoose.model('Data', mySchema);
+
+  // Define the username to delete
+  let ipToUnregister = '192.168.0.500';
+
+  // Delete the document(s) with the specified username
+  MyModel.deleteOne({ username: ipToUnregister }, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(`Deleted ${result.deletedCount} documents.`);
+    }
+  });
+})
+
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`)

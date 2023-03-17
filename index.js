@@ -82,7 +82,7 @@ app.get('/find', (req, res) => {
 app.get('/unregisterIp', (req, res) => {
 
   const Data = mongoose.model('Data', dataSchema);
-  // Define the username to delete
+  // Define the username to deletee
   let ipToUnregister = '192.168.0.500';
 
   // Delete the document(s) with the specified username
